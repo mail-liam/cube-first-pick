@@ -1,4 +1,4 @@
-.Pack {
+.pack {
   width: 80%;
   height: 100%;
   margin-top: 3px;
@@ -18,4 +18,9 @@
 
 .card {
   width: 100%;
+}
+
+.selected {
+  border: 2px lawngreen solid;
+  border-radius: 5%;
 }

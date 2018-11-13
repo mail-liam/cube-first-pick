@@ -26,19 +26,33 @@ class App extends Component {
     this.setState({ cube: event.target.value })
   }
 
+  selectCard = event => {
+    const card = event.target
+    this.removeSelected(event.target.parentElement)
+
+    card.classList.add("selected")
+    this.setState({ selected: card })
+  }
+
+  removeSelected = pack => {
+    for (let child of pack.children) {
+      child.classList.remove("selected")
+    }
+  }
+
   updatePick = () => {
     const selected = this.state.selected
   }
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <select id="cube-select">
           <option value="uncommon-cube" onChange={this.changeCube}>
             Uncommon Cube
           </option>
         </select>
-        <Pack pack={this.state.pack} />
+        <Pack pack={this.state.pack} selectCard={this.selectCard} />
         <button id="select-card" onClick={this.updatePick}>
           Pick It!
         </button>

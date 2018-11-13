@@ -6,7 +6,7 @@ import "../Pack.css"
 class Pack extends Component {
   render() {
     return (
-      <div className="Pack">
+      <div className="pack">
         {this.props.pack.map(card => {
           return (
             <img
@@ -14,6 +14,7 @@ class Pack extends Component {
               alt={`${card.replace("_", " ")}`}
               className="card"
               key={card}
+              onClick={this.props.selectCard}
             />
           )
         })}
