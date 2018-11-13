@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import base from "../base"
 import Pack from "./Pack"
 import Scoreboard from "./Scoreboard"
 import "../App.css"
@@ -9,10 +10,19 @@ class App extends Component {
     pack: [],
     selected: undefined,
     errorMessage: false,
+    picks: {},
   }
 
   componentDidMount() {
+    this.ref = base.syncState("picks", {
+      context: this,
+      state: "picks",
+    })
     this.getPack()
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref)
   }
 
   changeCube = event => {
@@ -53,7 +63,10 @@ class App extends Component {
       return null
     }
 
-    this.setState({ selected: undefined, errorMessage: false })
+    const cardName = selected.alt
+    const oldPicks = this.state.picks
+    oldPicks[cardName] = oldPicks[cardName] + 1 || 1
+    this.setState({ selected: undefined, errorMessage: false, picks: oldPicks })
     this.getPack()
   }
 
@@ -75,7 +88,7 @@ class App extends Component {
         </button>
         {this.state.errorMessage ? this.displayError() : null}
         <hr />
-        <Scoreboard />
+        <Scoreboard picks={this.state.picks} />
       </div>
     )
   }
