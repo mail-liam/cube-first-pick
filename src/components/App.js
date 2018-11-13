@@ -8,9 +8,19 @@ class App extends Component {
     cube: "uncommon-cube",
     pack: [],
     selected: undefined,
+    errorMessage: false,
   }
 
   componentDidMount() {
+    this.getPack()
+  }
+
+  changeCube = event => {
+    console.log("Changing cube...")
+    this.setState({ cube: event.target.value })
+  }
+
+  getPack = () => {
     fetch(`http://127.0.0.1:5000/get-pack/${this.state.cube}`, {
       method: "GET",
     })
@@ -19,11 +29,6 @@ class App extends Component {
         this.setState({ pack: result })
       })
       .catch(error => console.log(error))
-  }
-
-  changeCube = event => {
-    console.log("Changing cube...")
-    this.setState({ cube: event.target.value })
   }
 
   selectCard = event => {
@@ -42,6 +47,18 @@ class App extends Component {
 
   updatePick = () => {
     const selected = this.state.selected
+
+    if (!selected) {
+      this.setState({ errorMessage: true })
+      return null
+    }
+
+    this.setState({ selected: undefined, errorMessage: false })
+    this.getPack()
+  }
+
+  displayError = () => {
+    return <p className="error">You need to select a card first!</p>
   }
 
   render() {
@@ -56,6 +73,7 @@ class App extends Component {
         <button id="select-card" onClick={this.updatePick}>
           Pick It!
         </button>
+        {this.state.errorMessage ? this.displayError() : null}
         <hr />
         <Scoreboard />
       </div>

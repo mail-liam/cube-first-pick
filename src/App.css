@@ -16,3 +16,15 @@
 #select-card:hover {
   background-color: limegreen;
 }
+
+.error {
+  background-color: white;
+  color: red;
+  border: red 2px solid;
+  font-weight: 600;
+  width: 17%;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
