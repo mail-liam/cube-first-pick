@@ -8,4 +8,8 @@
   border-radius: 2%;
   width: 500px;
   height: 300px;
+
+  display: grid;
+  grid-column: 5;
+  grid-row: 3;
 }
