@@ -18,9 +18,10 @@
 
 .card {
   width: 100%;
+  border: 2px transparent solid;
+  border-radius: 5%;
 }
 
 .selected {
   border: 2px lawngreen solid;
-  border-radius: 5%;
 }
