@@ -1,4 +1,4 @@
-names = ["uncommon-cube"]
+names = ["uncommon_cube", "stevens_pauper_cube"]
 cubes = {}
 
 for cube in names:

@@ -6,7 +6,7 @@ import "../App.css"
 
 class App extends Component {
   state = {
-    cube: "uncommon-cube",
+    cube: "uncommon_cube",
     pack: [],
     selected: undefined,
     errorMessage: false,
@@ -26,8 +26,7 @@ class App extends Component {
   }
 
   changeCube = event => {
-    console.log("Changing cube...")
-    this.setState({ cube: event.target.value })
+    this.setState({ cube: event.target.value }, () => this.getPack())
   }
 
   getPack = () => {
@@ -64,31 +63,32 @@ class App extends Component {
     }
 
     const cardName = selected.alt
-    const oldPicks = this.state.picks
+    const allPicks = this.state.picks
+    const oldPicks = allPicks[this.state.cube]
     oldPicks[cardName] = oldPicks[cardName] + 1 || 1
-    this.setState({ selected: undefined, errorMessage: false, picks: oldPicks })
+    this.setState({ selected: undefined, errorMessage: false, picks: allPicks })
     this.getPack()
   }
 
-  displayError = () => {
-    return <p className="error">You need to select a card first!</p>
-  }
-
   render() {
+    console.log(this.state.picks[this.state.cube])
     return (
       <div className="app">
-        <select id="cube-select">
-          <option value="uncommon-cube" onChange={this.changeCube}>
-            Uncommon Cube
-          </option>
+        <select id="cube-select" onChange={this.changeCube}>
+          <option value="uncommon_cube">Uncommon Cube</option>
+          <option value="stevens_pauper_cube">Steven's Pauper Cube</option>
         </select>
         <Pack pack={this.state.pack} selectCard={this.selectCard} />
         <button id="select-card" onClick={this.updatePick}>
           Pick It!
         </button>
-        {this.state.errorMessage ? this.displayError() : null}
+        {this.state.errorMessage ? (
+          <p className="error">You need to select a card first!</p>
+        ) : null}
         <hr />
-        <Scoreboard picks={this.state.picks} />
+        {this.state.picks[this.state.cube] ? (
+          <Scoreboard picks={this.state.picks[this.state.cube]} />
+        ) : null}
       </div>
     )
   }

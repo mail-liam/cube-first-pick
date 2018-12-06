@@ -1,9 +1,8 @@
 import os
+from time import sleep
 import requests
 
-from time import sleep
-
-FILENAME = "uncommon_cube.txt"  # TODO: Parse CLI argument to get filename
+FILENAME = "stevens_pauper_cube.txt"  # TODO: Parse CLI argument to get filename
 
 
 def download_image(name, url, filename):
@@ -11,13 +10,13 @@ def download_image(name, url, filename):
     Save our downloaded image.
     From DeepSpace at https://stackoverflow.com/questions/30229231/python-save-image-from-url
     """
-    print(f"Retrieving card {name}")
+    print(f"Retrieving card {name}... ", end="")
     response = requests.get(url)
     if not response.ok:
         print("ERROR: ")
         print(response)
+        return None
 
-    print(f"Downloading card {name}")
     with open(filename, "wb") as image:
         for block in response.iter_content(1024):
             if not block:
@@ -43,7 +42,7 @@ def main():
         (
             name,
             url_base.format(name, set),
-            os.path.join(image_path, f"{name.replace(' ', '-')}.jpg"),
+            os.path.join(image_path, f"{name.replace(' ', '_')}.jpg"),
         )
         for name, set in lines
     ]
