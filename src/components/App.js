@@ -14,10 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.ref = base.syncState("picks", {
-      context: this,
-      state: "picks",
-    })
+    this.syncPicks()
     this.getPack()
   }
 
@@ -26,7 +23,17 @@ class App extends Component {
   }
 
   changeCube = event => {
-    this.setState({ cube: event.target.value }, () => this.getPack())
+    this.setState({ cube: event.target.value }, () => {
+      this.syncPicks()
+      this.getPack()
+    })
+  }
+
+  syncPicks = () => {
+    this.ref = base.syncState(`${this.state.cube}/picks`, {
+      context: this,
+      state: "picks",
+    })
   }
 
   getPack = () => {
@@ -71,7 +78,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.picks[this.state.cube])
+    console.log(this.state.picks)
     return (
       <div className="app">
         <select id="cube-select" onChange={this.changeCube}>
@@ -87,9 +94,7 @@ class App extends Component {
             <p className="error">You need to select a card first!</p>
           ) : null}
         </div>
-        {this.state.picks[this.state.cube] ? (
-          <Scoreboard picks={this.state.picks[this.state.cube]} />
-        ) : null}
+        {this.state.picks ? <Scoreboard picks={this.state.picks} /> : null}
       </div>
     )
   }
