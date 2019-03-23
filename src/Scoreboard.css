@@ -1,0 +1,9 @@
+@media screen and (max-width: 615px) {
+  #scoreboard h2 {
+    font-size: 1.8em;
+  }
+
+  #scoreboard p {
+    font-size: 1.8em;
+  }
+}

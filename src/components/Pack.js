@@ -11,7 +11,7 @@ class Pack extends Component {
           return (
             <img
               src={`http://127.0.0.1:5000/get-image/${card}`}
-              alt={`${card.replace("_", " ")}`}
+              alt={`${card.replace(/_/g, " ")}`}
               className="card"
               key={card}
               onClick={this.props.selectCard}

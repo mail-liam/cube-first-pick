@@ -13,7 +13,7 @@
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
+  grid-gap: 5px;
 }
 
 .card {
@@ -24,4 +24,18 @@
 
 .selected {
   border: 2px lawngreen solid;
+}
+
+@media screen and (max-width: 1140px) {
+  .pack {
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .pack {
+    display: flex;
+    flex-direction: column;
+  }
 }

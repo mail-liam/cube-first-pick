@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import "../Scoreboard.css"
 
 // Shows the top 10 cards with the highest pick count
 class Scoreboard extends Component {
@@ -8,7 +9,7 @@ class Scoreboard extends Component {
   }
 
   getTopTen = picks => {
-    const topTen = Object.entries(this.props.picks)
+    const topTen = Object.entries(picks)
       .sort((a, b) => {
         return b[1] - a[1]
       })
@@ -21,7 +22,7 @@ class Scoreboard extends Component {
 
   render() {
     return (
-      <div>
+      <div id="scoreboard">
         <h2>Highest Picked Cards</h2>
         {this.getTopTen(this.props.picks)}
       </div>

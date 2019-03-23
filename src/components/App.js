@@ -79,13 +79,14 @@ class App extends Component {
           <option value="stevens_pauper_cube">Steven's Pauper Cube</option>
         </select>
         <Pack pack={this.state.pack} selectCard={this.selectCard} />
-        <button id="select-card" onClick={this.updatePick}>
-          Pick It!
-        </button>
-        {this.state.errorMessage ? (
-          <p className="error">You need to select a card first!</p>
-        ) : null}
-        <hr />
+        <div id="select-wrapper">
+          <button id="select-card" onClick={this.updatePick}>
+            Pick It!
+          </button>
+          {this.state.errorMessage ? (
+            <p className="error">You need to select a card first!</p>
+          ) : null}
+        </div>
         {this.state.picks[this.state.cube] ? (
           <Scoreboard picks={this.state.picks[this.state.cube]} />
         ) : null}
