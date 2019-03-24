@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.picks)
+    // console.log(this.state.picks)
     return (
       <div className="app">
         <select id="cube-select" onChange={this.changeCube}>
