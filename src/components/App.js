@@ -30,6 +30,10 @@ class App extends Component {
   }
 
   syncPicks = () => {
+    if (this.ref) {
+      base.removeBinding(this.ref)
+    }
+
     this.ref = base.syncState(`${this.state.cube}/picks`, {
       context: this,
       state: "picks",
