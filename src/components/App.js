@@ -37,9 +37,14 @@ class App extends Component {
   }
 
   getPack = () => {
-    fetch(`http://127.0.0.1:5000/get-pack/${this.state.cube}`, {
-      method: "GET",
-    })
+    fetch(
+      `https://us-central1-cube-first-pick.cloudfunctions.net/getPack?cube=${
+        this.state.cube
+      }`,
+      {
+        method: "GET",
+      }
+    )
       .then(res => res.json())
       .then(result => {
         this.setState({ pack: result })
@@ -70,10 +75,9 @@ class App extends Component {
     }
 
     const cardName = selected.alt
-    const allPicks = this.state.picks
-    const oldPicks = allPicks[this.state.cube]
+    const oldPicks = this.state.picks
     oldPicks[cardName] = oldPicks[cardName] + 1 || 1
-    this.setState({ selected: undefined, errorMessage: false, picks: allPicks })
+    this.setState({ selected: undefined, errorMessage: false, picks: oldPicks })
     this.getPack()
   }
 
